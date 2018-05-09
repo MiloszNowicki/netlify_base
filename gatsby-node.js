@@ -41,20 +41,24 @@ exports.createPages = ({graphql, boundActionCreators}) => {
     }
             `
         ).then(result => {
-            console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>^^^^^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
             result.data.allMarkdownRemark.edges.forEach(({node}) => {
                 console.log(node)
                 console.log(createPage({
-                    path: `/bolg-posts${node.fields.slug}post`,
-                    component: path.resolve('./src/templatesMD/BlogPost.js'),
+                    path: `/bolg-posts${node.fields.slug}`,
+                    component: path.resolve('./src/components/templatesMD/BlogPost.js'),
                     context: {
-                        //data passed to context is available in page queries as GraphQl variables
                         id: node.id,
                     },
                 }))
             })
             resolve()
-            console.log(result.data)
         })
     })
 }
+
+/*
+* chce stworzyć komponent zawierający typy zapytań (planety gatunki etc)
+* clyli wylistować  nody
+* node rozwija sie do listy itemów
+* po kliknienciu w item przecodzę do strony itemu
+* */

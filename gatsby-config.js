@@ -9,6 +9,7 @@ module.exports = {
             },
         },
         `gatsby-transformer-remark`,
+        'star-wars-source',
 
     ],
 };
