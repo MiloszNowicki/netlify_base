@@ -32,23 +32,29 @@ exports.createPages = ({graphql, boundActionCreators}) => {
               path
               title
             }
+            fields {
+              slug
+            }
           }
         }
       }
     }
             `
         ).then(result => {
+            console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>^^^^^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
             result.data.allMarkdownRemark.edges.forEach(({node}) => {
-                createPage({
-                    path: node.fields.slug,
+                console.log(node)
+                console.log(createPage({
+                    path: `/bolg-posts/${node.fields.slug}`,
                     component: path.resolve('./src/templatesMD/BlogPost.js'),
                     context: {
                         //data passed to context is available in page queries as GraphQl variables
-                        slug: node.fields.slug,
+                        id: node.id,
                     },
-                })
+                }))
             })
             resolve()
+            console.log(result.data)
         })
     })
 }
