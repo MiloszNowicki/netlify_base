@@ -1,8 +1,11 @@
 import React from 'react'
 
-const BlogPost = (data) => {
-    const { markdownRemark } = data
+const BlogPost = (post) => {
+    console.log(post)
+    const { markdownRemark } = post.data
+    console.log(markdownRemark)
     const {frontmatter, html} = markdownRemark
+    console.log(frontmatter)
     return(
         <div>
             <div>
@@ -12,19 +15,22 @@ const BlogPost = (data) => {
             <div>
                 <h3>some content</h3>
             </div>
+            netlify is lliek addon to git and jenkins
         </div>
     )
 }
 
 export const pageQuery = graphql`
-    query BlogPostByPath($path: String!) {
-    markdownRemark(frontmatter: { path: { eq: $path } }) {
-      html
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
-        path
-        title
-      }
+    query BlogPost ($id: String!) {
+  markdownRemark(id: { eq: $id })  {
+    id
+    frontmatter {
+      title
+      path
+      date
     }
   }
+}
 `
+
+export default BlogPost
