@@ -45,7 +45,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
             result.data.allMarkdownRemark.edges.forEach(({node}) => {
                 console.log(node)
                 console.log(createPage({
-                    path: `/bolg-posts${node.fields.slug}/post`,
+                    path: `/bolg-posts${node.fields.slug}post`,
                     component: path.resolve('./src/templatesMD/BlogPost.js'),
                     context: {
                         //data passed to context is available in page queries as GraphQl variables
